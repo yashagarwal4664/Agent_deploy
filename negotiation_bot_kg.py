@@ -8,12 +8,10 @@ import datetime
 from dotenv import load_dotenv
 from typing import List, Optional, Dict, Any
 
-from langchain.chat_models import ChatOpenAI
-
+from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain.memory import ConversationBufferMemory
-
-
+from langchain_core.runnables.history import RunnableWithMessageHistory
 
 from negotiation_kg import NegotiationKnowledgeGraph
 
@@ -234,13 +232,8 @@ def get_memory(session_id: str):
         input_key="message"
     )
 
-from langchain.chains import LLMChain
-
-chain = LLMChain(prompt=prompt, llm=llm)
-
-from langchain.runnables import Runnable
-
-conversation = Runnable(
+chain = prompt | llm
+conversation = RunnableWithMessageHistory(
     runnable=chain,
     get_session_history=get_memory,
     input_messages_key="message",
