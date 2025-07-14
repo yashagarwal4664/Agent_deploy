@@ -238,7 +238,9 @@ from langchain.chains import LLMChain
 
 chain = LLMChain(prompt=prompt, llm=llm)
 
-conversation = RunnableWithMessageHistory(
+from langchain.runnables import Runnable
+
+conversation = Runnable(
     runnable=chain,
     get_session_history=get_memory,
     input_messages_key="message",
