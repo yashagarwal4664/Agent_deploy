@@ -12,7 +12,8 @@ from langchain.chat_models import ChatOpenAI
 
 from langchain.prompts import PromptTemplate
 from langchain.memory import ConversationBufferMemory
-from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain.runnables import RunnableWithMessageHistory
+
 
 from negotiation_kg import NegotiationKnowledgeGraph
 
