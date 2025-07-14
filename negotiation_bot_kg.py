@@ -234,7 +234,10 @@ def get_memory(session_id: str):
         input_key="message"
     )
 
-chain = prompt | llm
+from langchain.chains import LLMChain
+
+chain = LLMChain(prompt=prompt, llm=llm)
+
 conversation = RunnableWithMessageHistory(
     runnable=chain,
     get_session_history=get_memory,
